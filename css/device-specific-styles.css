@@ -1,0 +1,16 @@
+@media only screen and (max-width: 768px) {
+    .desktop-content {
+        display: none !important;
+    }
+    .mobile-content {
+        display: block !important;
+    }
+}
+@media only screen and (min-width: 769px) {
+    .desktop-content {
+        display: block !important;
+    }
+    .mobile-content {
+        display: none !important;
+    }
+}
