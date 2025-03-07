@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Under construction</title>
+<title>Himashana Suraweera - portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="css/style.css?v=1">
@@ -12,17 +12,29 @@
 </head>
 <body class="body">
 
-<br><br>
+<br>
 <center>
     <div class="container">
         <div class="page m-2">
-            <i class="fa fa-gear fa-spin" style="font-size:80px"></i>
-            <h1>...Under construction...</h1>
-            <p>An amazing site is coming to this web address. Check back soon!</p>
-            <i class="bi bi-archive-fill"></i>
+            <div id="about-me-section"></div>
         </div>
     </div>
 </center>
+
+
+<script type="module">
+    import { loadComponent } from './components-binder.js';
+    import { applyTypewriterEffect } from './typewriter.js';
+
+    loadComponent('about-me-section', 'components/about-me-section.html', () => {
+        applyTypewriterEffect('typewriter-element');
+    });
+</script>
+
+<!-- Typewriter -->
+<script>
+    
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
