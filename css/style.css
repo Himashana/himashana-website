@@ -5,7 +5,7 @@
     background-attachment: fixed;
     background-position: center;
     font-family: 'Roboto', sans-serif;
-    background-color:skyblue;
+    background-color:#BE6F85;
 }
 
 .page {
@@ -34,6 +34,14 @@
     margin-bottom: 10px;
 }
 
+.section-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #875A72;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .about-me-section {
     padding: 20px;
     padding-top: 40px;
@@ -41,6 +49,8 @@
     background-color: rgba(157,102,118, 0.2);
     min-height: 400px;
     margin-bottom: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .profile-description {
@@ -49,4 +59,49 @@
     color: rgb(34, 34, 34);
     text-align: center;
     margin-bottom: 20px;
+}
+
+.underline-text {
+    text-decoration: underline;
+    text-decoration-color: #BE6F85;
+    text-decoration-thickness: 2px;
+}
+
+.timeline-item {
+    padding: 5px;
+    padding-top: 15px;
+    padding-bottom:15px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0px;
+    border-radius: 10px;
+}
+
+.timeline-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: rgb(34, 34, 34);
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.timeline-subtitle {
+    font-size: 17px;
+    font-weight: 700;
+    color: rgb(34, 34, 34);
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.timeline-description {
+    font-size: 17px;
+    color: rgb(34, 34, 34);
+    text-align: center;
+    margin-bottom: 1px;
+}
+
+.timeline-connector {
+    width: 5px;
+    height: 50px;
+    background-color: rgb(87, 85, 85);
+    margin: 0px;
 }
