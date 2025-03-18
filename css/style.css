@@ -1,3 +1,30 @@
+@keyframes floatUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.float-up {
+    opacity: 0; /* Initially invisible */
+}
+  
+.float-up.show {
+  animation: floatUp 1.5s ease-out forwards; /* Trigger the animation when 'show' class is added */
+}
+
+.float-up-on-no-scroll {
+  animation: floatUp 1.5s ease-out forwards;
+}
+  
 .body {
     background-image: url("../assets/images/pexels-pixabay-257092.jpg");
     background-size: cover;
@@ -35,11 +62,11 @@
 }
 
 .section-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: #875A72;
-    text-align: center;
-    margin-bottom: 20px;
+    /* font-size: 30px; */
+    font-weight: 700 !important;
+    color: #875A72 !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
 }
 
 .about-me-section {
@@ -74,14 +101,16 @@
     background-color: rgba(255, 255, 255, 0.6);
     margin-bottom: 0px;
     border-radius: 10px;
+    border: 3px solid #875A72;
 }
 
 .timeline-title {
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 500;
     color: rgb(34, 34, 34);
     text-align: center;
     margin-bottom: 1px;
+    /* text-transform: capitalize; */
 }
 
 .timeline-subtitle {
@@ -100,8 +129,15 @@
 }
 
 .timeline-connector {
-    width: 5px;
-    height: 50px;
-    background-color: rgb(87, 85, 85);
+    width: 3px;
+    height: 30px;
+    background-color: #875A72;
     margin: 0px;
+}
+
+.section-item-type-1 {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0px;
+    border-radius: 10px;
+    /* border: 3px solid #875A72; */
 }
