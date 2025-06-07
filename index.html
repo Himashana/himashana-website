@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Under construction</title>
+<title>Himashana Suraweera - portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="css/style.css?v=1">
@@ -12,17 +12,72 @@
 </head>
 <body class="body">
 
-<br><br>
+    <div class="alert alert-dark" style="text-align: center;" role="alert">
+        <b>This site is still under construction</b>
+      </div>
+<br>
 <center>
     <div class="container">
         <div class="page m-2">
-            <i class="fa fa-gear fa-spin" style="font-size:80px"></i>
-            <h1>...Under construction...</h1>
-            <p>An amazing site is coming to this web address. Check back soon!</p>
-            <i class="bi bi-archive-fill"></i>
+            <div id="about-me-section"></div>
+            <div id="educational-journey-section" class="float-up"></div>
+            <div id="skills-section" class="float-up" style="margin-top: 40px;"></div>
         </div>
     </div>
 </center>
+
+
+<script type="module">
+    import { loadComponent } from './components-binder.js';
+    import { applyTypewriterEffect } from './typewriter.js';
+
+    loadComponent('about-me-section', 'components/about-me-section.html', () => {
+        applyTypewriterEffect('typewriter-element');
+    });
+    loadComponent('educational-journey-section', 'components/educational-journey-section.html');
+    loadComponent('skills-section', 'components/skills-section.html');
+</script>
+
+<script type="module">
+    import { capitalizeText } from './helpers.js';
+
+    // window.onload = function () {
+    //     capitalizeText(".timeline-title");
+    //     capitalizeText(".timeline-subtitle");
+    //     capitalizeText(".timeline-description");
+    // };
+</script>
+
+<script>
+    // Function to check if the element is in the viewport (more than 50% visible)
+    function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    return (
+        rect.top <= windowHeight * 0.75 && // Element enters 75% of viewport height
+        rect.bottom >= windowHeight * 0.25 // Prevents early activation
+    );
+    }
+
+    // Trigger the animation when the element enters the viewport
+    function handleScrollAnimation() {
+    const elements = document.querySelectorAll('.float-up');
+
+    elements.forEach((el) => {
+        if (isElementInViewport(el) && !el.classList.contains('show')) {
+        el.classList.add('show'); // Start animation only once when in view
+        }
+    });
+    }
+
+    window.addEventListener('scroll', handleScrollAnimation);
+    window.addEventListener('resize', handleScrollAnimation);
+
+    window.onload = function () {
+        handleScrollAnimation();
+    };
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
