@@ -1,18 +1,12 @@
---- 
-deployment: 
-  tasks: 
-    - export DEPLOYPATH=/home/chnsoftw/himashana.me/ 
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/chnsoftw/himashana.me/
     - /bin/cp .htaccess $DEPLOYPATH 
+    - /bin/cp -R assets $DEPLOYPATH 
+    - /bin/cp -R components $DEPLOYPATH 
     - /bin/cp components-binder.js $DEPLOYPATH 
+    - /bin/cp -R css $DEPLOYPATH 
     - /bin/cp helpers.js $DEPLOYPATH 
     - /bin/cp index.html $DEPLOYPATH 
     - /bin/cp typewriter.js $DEPLOYPATH 
-    - /bin/cp .github\workflows\deploy.yml $DEPLOYPATH 
-    - /bin/cp assets\images\me-transparent.png $DEPLOYPATH 
-    - /bin/cp assets\images\me.jpg $DEPLOYPATH 
-    - /bin/cp assets\images\pexels-pixabay-257092.jpg $DEPLOYPATH 
-    - /bin/cp components\about-me-section.html $DEPLOYPATH 
-    - /bin/cp components\educational-journey-section.html $DEPLOYPATH 
-    - /bin/cp components\skills-section.html $DEPLOYPATH 
-    - /bin/cp css\device-specific-styles.css $DEPLOYPATH 
-    - /bin/cp css\style.css $DEPLOYPATH 
