@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 
 @REM Create .cpanel.yml deployment file:
 
@@ -13,28 +14,37 @@
 
 echo Buiding script...
 
-echo --- > .cpanel.yml
-echo deployment: >> .cpanel.yml
-echo   tasks: >> .cpanel.yml
-echo     - export DEPLOYPATH=/home/chnsoftw/himashana.me/ >> .cpanel.yml
+:: Deployment target directory
+set DEPLOYPATH=/home/chnsoftw/himashana.me/
 
-@REM Ignored files and folders list
-set IGNORED_ITEMS= .cpanel.yml .git .gitignore .vscode .gitattributes .gitignore README.md build-deploy-script.bat
+:: Ignored items (space padded for findstr matching)
+set "IGNORED_ITEMS= .cpanel.yml .git .gitignore .vscode .gitattributes README.md build-deploy-script.bat .github "
 
-@REM Get all the files in the root folder and write in this script
-for /r %%i in (*) do (
-    set "FILE=%%~nxi"
-    echo %IGNORED_ITEMS% | findstr /c:" %%~nxi " >nul
+:: Start the .cpanel.yml file
+(
+    echo ---
+    echo deployment:
+    echo   tasks:
+    echo     - export DEPLOYPATH=%DEPLOYPATH%
+) > .cpanel.yml
+
+:: Loop through all files and directories in the current directory
+for /f "delims=" %%A in ('dir /b /a') do (
+    set "ITEM=%%A"
+
+    echo !IGNORED_ITEMS! | findstr /c:" !ITEM! " >nul
     if errorlevel 1 (
-        echo %%i | findstr /c:"\\\.git\\" /c:"\\\.vscode\\" >nul
-        if errorlevel 1 (
-            set "REL_PATH=%%i"
-            setlocal enabledelayedexpansion
-            set "REL_PATH=!REL_PATH:%CD%\=!" 
-            echo writing !REL_PATH!
-            echo     - /bin/cp !REL_PATH! $DEPLOYPATH >> .cpanel.yml
-            endlocal
+        if exist "%%A\" (
+            :: If it's a directory
+            echo Adding directory: %%A
+            echo     - /bin/cp -R %%A $DEPLOYPATH >> .cpanel.yml
+        ) else (
+            :: If it's a file
+            echo Adding file: %%A
+            echo     - /bin/cp %%A $DEPLOYPATH >> .cpanel.yml
         )
+    ) else (
+        echo Ignoring: %%A
     )
 )
 
