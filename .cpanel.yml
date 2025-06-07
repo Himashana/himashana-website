@@ -4,6 +4,7 @@ deployment:
     - export DEPLOYPATH=/home/chnsoftw/himashana.me/ 
     - /bin/cp .htaccess $DEPLOYPATH 
     - /bin/cp components-binder.js $DEPLOYPATH 
+    - /bin/cp helpers.js $DEPLOYPATH 
     - /bin/cp index.html $DEPLOYPATH 
     - /bin/cp typewriter.js $DEPLOYPATH 
     - /bin/cp .github\workflows\deploy.yml $DEPLOYPATH 
@@ -12,5 +13,6 @@ deployment:
     - /bin/cp assets\images\pexels-pixabay-257092.jpg $DEPLOYPATH 
     - /bin/cp components\about-me-section.html $DEPLOYPATH 
     - /bin/cp components\educational-journey-section.html $DEPLOYPATH 
+    - /bin/cp components\skills-section.html $DEPLOYPATH 
     - /bin/cp css\device-specific-styles.css $DEPLOYPATH 
     - /bin/cp css\style.css $DEPLOYPATH 
