@@ -6,6 +6,7 @@ export function applyTypewriterEffect(elementId, forwardSpeed = 100, backwardSpe
     var txt = element.innerHTML;
     element.innerHTML = '';
 
+    // blinking cursor effect
     function typeForward() {
         try {
             if (i < txt.length) {
@@ -13,7 +14,7 @@ export function applyTypewriterEffect(elementId, forwardSpeed = 100, backwardSpe
                     element.innerHTML = txt.charAt(i);
                 } else {
                     element.innerHTML += txt.charAt(i);
-                } 
+                }
                 i++;
                 setTimeout(typeForward, forwardSpeed);
             } else {
@@ -30,11 +31,11 @@ export function applyTypewriterEffect(elementId, forwardSpeed = 100, backwardSpe
                 if (i === 0) {
                     element.innerHTML = "|";
                 } else {
-                    element.innerHTML = txt.substring(0, i); 
+                    element.innerHTML = txt.substring(0, i);
                 }
                 i--;
                 setTimeout(clearBackward, backwardSpeed);
-                
+
             } else {
                 typeForward();
             }
@@ -44,4 +45,26 @@ export function applyTypewriterEffect(elementId, forwardSpeed = 100, backwardSpe
     }
 
     typeForward();
+}
+
+// Scroll reveal animation for progress bars
+export function initScrollReveal() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-item').forEach(el => {
+        observer.observe(el);
+    });
 }
