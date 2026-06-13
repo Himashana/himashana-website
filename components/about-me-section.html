@@ -7,28 +7,8 @@
           <div class="section-divider"></div>
         </div>
         <div class="about-content">
-          <h3 class="mb-4 text-center">Software Engineer & Developer</h3>
-          <p class="about-text mb-4">
-            I am a passionate
-            <span class="text-primary fw-semibold"
-              >Associate Software Engineer</span
-            >
-            with strong foundations in both frontend and backend programming.
-            Experienced in software, web and mobile applications and 3D game
-            development, I thrive on solving complex problems and creating
-            efficient, scalable solutions.
-          </p>
-          <p class="about-text mb-4">
-            My journey combines academic excellence from
-            <span class="text-primary fw-semibold"
-              >University of West London</span
-            >
-            and
-            <span class="text-primary fw-semibold">Edith Cowan University</span>
-            with hands-on experience in modern technology stacks. I'm driven by
-            curiosity and committed to continuous learning in the evolving tech
-            landscape.
-          </p>
+          <h3 class="mb-4 text-center" data-bind="bio.heading">Software Engineer & Developer</h3>
+          <div data-bio-paragraphs></div>
 
           <div class="row g-3 mt-4">
             <div class="col-md-4">
@@ -36,9 +16,7 @@
                 <i class="fas fa-envelope text-primary"></i>
                 <div class="ms-3">
                   <div class="fw-semibold mb-1">Email</div>
-                  <a href="mailto:contact@himashana.me" class="text-secondary"
-                    >contact@himashana.me</a
-                  >
+                  <a data-bind-href="mailto:|contact.email" data-bind="contact.email" class="text-secondary"></a>
                 </div>
               </div>
             </div>
@@ -47,9 +25,7 @@
                 <i class="fas fa-phone text-primary"></i>
                 <div class="ms-3">
                   <div class="fw-semibold mb-1">Phone</div>
-                  <a href="tel:+1234567890" class="text-secondary"
-                    >+1 234 567 890</a
-                  >
+                  <a data-bind-href="tel:|contact.phoneHref" data-bind="contact.phone" class="text-secondary"></a>
                 </div>
               </div>
             </div>
@@ -58,7 +34,7 @@
                 <i class="fas fa-map-marker-alt text-primary"></i>
                 <div class="ms-3">
                   <div class="fw-semibold mb-1">Location</div>
-                  <span class="text-secondary">Sri Lanka</span>
+                  <span class="text-secondary" data-bind="contact.locationShort"></span>
                 </div>
               </div>
             </div>

@@ -20,13 +20,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Himashana</a>
+            <a class="navbar-brand fw-bold" href="#" data-bind="identity.shortName">Himashana</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about-me-section">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#terminal-section">Terminal</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills-section">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#educational-journey-section">Education</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
@@ -41,24 +42,20 @@
             <div class="row align-items-center min-vh-75">
                 <div class="col-lg-8 text-center text-lg-start">
                     <div class="hero-content">
-                        <p class="hero-subtitle mb-2 fw-medium">Hi there, I'm</p>
+                        <p class="hero-subtitle mb-2 fw-medium" data-bind="identity.greeting">Hi there, I'm</p>
                         <h1 class="hero-title fw-bold mb-3" id="typewriter-element">Kavindu Himashana Suraweera</h1>
-                        <p class="hero-subheading mb-4 fs-4">Associate Software Engineer</p>
+                        <p class="hero-subheading mb-4 fs-4" data-bind="identity.title">Associate Software Engineer</p>
                         <div class="hero-buttons">
                             <a href="#contact-section" class="btn btn-primary btn-lg rounded-pill px-4 me-2">Let's Talk</a>
                             <a href="#skills-section" class="btn btn-outline-primary btn-lg rounded-pill px-4">My Skills</a>
                         </div>
-                        <div class="social-links mt-4">
-                            <a href="#" class="social-link me-3" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-link me-3" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-link me-3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        </div>
+                        <!-- Social links are rendered from data/profile.js by components-binder.js -->
+                        <div class="social-links mt-4" data-social-links></div>
                     </div>
                 </div>
                 <div class="col-lg-4 d-none d-lg-flex justify-content-center">
                     <div class="hero-image-wrapper">
-                        <img src="assets/images/me.jpg" alt="Kavindu Himashana Suraweera" class="hero-image">
+                        <img data-bind-src="identity.photo" data-bind-alt="identity.fullName" src="assets/images/me.jpg" alt="Kavindu Himashana Suraweera" class="hero-image">
                     </div>
                 </div>
             </div>
@@ -68,6 +65,7 @@
     <!-- Components Container -->
     <div class="components-container">
         <div id="about-me-section"></div>
+        <div id="terminal-section"></div>
         <div id="skills-section"></div>
         <div id="educational-journey-section"></div>
         <div id="contact-section"></div>
@@ -77,30 +75,35 @@
     <footer>
         <div class="container text-center">
             <p class="mb-0">
-                &copy; <span id="current-year">2026</span> Kavindu Himashana Suraweera. All rights reserved.
+                &copy; <span id="current-year">2026</span> <span data-bind="identity.fullName">Kavindu Himashana Suraweera</span>. All rights reserved.
             </p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
-        import { applyTypewriterEffect } from './typewriter.js';
+        import { applyTypewriterEffect, initScrollReveal } from './typewriter.js';
         import { loadAllComponents } from './components-binder.js';
-        import { capitalizeText } from './helpers.js';
+        import { PortfolioTerminal } from './terminal.js';
+        import { profile } from './data/profile.js';
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Load components
+            // Load components, then bind profile data and reveal animations.
             loadAllComponents().then(() => {
-                // Apply animations after components are loaded
-                import('./typewriter.js').then(({ initScrollReveal }) => {
-                    initScrollReveal();
-                });
-                capitalizeText('.timeline-title');
-                capitalizeText('.timeline-subtitle');
-                capitalizeText('.timeline-description');
+                initScrollReveal();
+
+                // Initialize terminal after components are loaded
+                setTimeout(() => {
+                    if (document.getElementById('terminal-input')) {
+                        new PortfolioTerminal();
+                    }
+                }, 500);
             });
 
-            // Typewriter effect
+            // Hero name drives the typewriter and the document title.
+            const titleEl = document.getElementById('typewriter-element');
+            titleEl.textContent = profile.identity.fullName;
+            document.title = `${profile.identity.fullName} - ${profile.identity.title}`;
             applyTypewriterEffect('typewriter-element');
 
             // Current year for footer
