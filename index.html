@@ -6,6 +6,53 @@
     <title>Kavindu Himashana Suraweera - Software Engineer</title>
     <meta name="description" content="Portfolio of Kavindu Himashana Suraweera - Associate Software Engineer">
 
+    <!-- Detect low-power / GPU-off / data-saver / reduced-motion devices BEFORE first
+         paint and tag <html> so the heavy effects (backdrop-blur, infinite animations)
+         degrade gracefully while capable devices keep the full rich UI. -->
+    <script>
+        (function () {
+            try {
+                var n = navigator;
+                var lowMem = n.deviceMemory && n.deviceMemory <= 2;
+                var lowCpu = n.hardwareConcurrency && n.hardwareConcurrency <= 2;
+                var saveData = n.connection && n.connection.saveData;
+                var reduce = window.matchMedia &&
+                    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                // ?lite forces the lightweight mode (handy to preview GPU-off look).
+                var forced = /[?&]lite\b/.test(location.search);
+                if (forced || lowMem || lowCpu || saveData || reduce) {
+                    document.documentElement.classList.add('perf-lite');
+                }
+            } catch (e) { /* keep full UI on detection failure */ }
+        })();
+
+        // Runtime FPS probe: specs can't reveal whether GPU acceleration is
+        // actually on (a powerful machine with it disabled renders these blurs
+        // on the CPU and janks). So measure real frame rate shortly after load
+        // and drop to perf-lite if the page can't hold a smooth frame rate.
+        window.addEventListener('load', function () {
+            var root = document.documentElement;
+            if (root.classList.contains('perf-lite') || !window.requestAnimationFrame) return;
+            // Let the initial load/layout spike settle before sampling.
+            setTimeout(function () {
+                var frames = 0, start, last, longFrames = 0;
+                function tick(now) {
+                    if (start === undefined) { start = last = now; }
+                    frames++;
+                    if (now - last > 50) longFrames++;   // a visibly dropped frame
+                    last = now;
+                    if (now - start < 1000) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        var fps = frames / ((now - start) / 1000);
+                        if (fps < 40 || longFrames > 5) root.classList.add('perf-lite');
+                    }
+                }
+                requestAnimationFrame(tick);
+            }, 600);
+        });
+    </script>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/device-specific-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -35,7 +82,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about-me-section">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#terminal-section">Terminal</a></li>
+                    <li class="nav-item nav-item-terminal"><a class="nav-link" href="#terminal-section">Terminal</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills-section">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#educational-journey-section">Education</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact-section">Contact</a></li>
@@ -48,7 +95,7 @@
     <section id="hero-section" class="hero-section py-5 py-lg-0">
         <div class="container">
             <div class="row align-items-center min-vh-75">
-                <div class="col-lg-8 text-center text-lg-start">
+                <div class="col-lg-8 text-center text-lg-start order-2 order-lg-1">
                     <div class="hero-content">
                         <p class="hero-subtitle mb-2 fw-medium" data-bind="identity.greeting">Hi there, I'm</p>
                         <h1 class="hero-title fw-bold mb-3" id="typewriter-element">Kavindu Himashana Suraweera</h1>
@@ -61,7 +108,7 @@
                         <div class="social-links mt-4" data-social-links></div>
                     </div>
                 </div>
-                <div class="col-lg-4 d-none d-lg-flex justify-content-center">
+                <div class="col-lg-4 d-flex justify-content-center order-1 order-lg-2 mb-4 mb-lg-0">
                     <div class="hero-image-wrapper">
                         <img data-bind-src="identity.photo" data-bind-alt="identity.fullName" src="assets/images/me.jpg" alt="Kavindu Himashana Suraweera" class="hero-image">
                     </div>

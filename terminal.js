@@ -8,8 +8,15 @@ class PortfolioTerminal {
         this.input = document.getElementById('terminal-input');
         this.body = document.getElementById('terminal-body');
         this.output = this.body.querySelector('.terminal-output');
+        this.inputLine = this.input.closest('.terminal-input-line');
         this.commandHistory = [];
         this.historyIndex = -1;
+
+        // Hidden mirror to measure the typed text width so the input hugs its
+        // content and the block cursor lands right after the last character.
+        this.mirror = document.createElement('span');
+        this.mirror.className = 'terminal-input-mirror';
+        this.inputLine.appendChild(this.mirror);
         
         this.commands = {
             help: () => this.showHelp(),
@@ -33,19 +40,30 @@ class PortfolioTerminal {
     
     init() {
         this.input.addEventListener('keydown', (e) => this.handleInput(e));
-        
-        // Focus input when clicking anywhere in terminal
-        this.body.addEventListener('click', () => {
-            this.input.focus();
-        });
-        
-        // Keep cursor blinking
-        setInterval(() => {
-            const cursor = document.querySelector('.terminal-cursor');
-            if (cursor && document.activeElement === this.input) {
-                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-            }
-        }, 500);
+
+        // Resize the input to its content as the user types.
+        this.input.addEventListener('input', () => this.updateWidth());
+
+        // Focus input when clicking anywhere in terminal.
+        this.body.addEventListener('click', () => this.input.focus());
+
+        // Block cursor blinks (CSS) while focused; goes hollow when not.
+        this.input.addEventListener('focus', () => this.inputLine.classList.remove('idle'));
+        this.input.addEventListener('blur', () => this.inputLine.classList.add('idle'));
+
+        this.inputLine.classList.add('idle');
+        this.updateWidth();
+    }
+
+    // Match the input's width to its text using the hidden mirror span.
+    updateWidth() {
+        const cs = getComputedStyle(this.input);
+        this.mirror.style.fontFamily = cs.fontFamily;
+        this.mirror.style.fontSize = cs.fontSize;
+        this.mirror.style.fontWeight = cs.fontWeight;
+        this.mirror.style.letterSpacing = cs.letterSpacing;
+        this.mirror.textContent = this.input.value;
+        this.input.style.width = `${Math.ceil(this.mirror.getBoundingClientRect().width) + 1}px`;
     }
     
     handleInput(e) {
@@ -80,6 +98,9 @@ class PortfolioTerminal {
             e.preventDefault();
             this.autocomplete();
         }
+
+        // Keep the input/cursor sized after any programmatic value change.
+        this.updateWidth();
     }
     
     executeCommand(input) {
