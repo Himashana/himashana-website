@@ -1,24 +1,46 @@
-<section>
-  <div class="about-me-section">
-    <div class="float-up-on-no-scroll">
-      <img src="assets/images/me.jpg" alt="" class="profile-image" />
+<section class="py-5" id="about-me-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="section-header text-center mb-5">
+          <h2 class="section-title">About Me</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="about-content">
+          <h3 class="mb-4 text-center" data-bind="bio.heading">Software Engineer & Developer</h3>
+          <div data-bio-paragraphs></div>
+
+          <div class="row g-3 mt-4">
+            <div class="col-md-4">
+              <div class="about-info-item">
+                <i class="fas fa-envelope text-primary"></i>
+                <div class="ms-3">
+                  <div class="fw-semibold mb-1">Email</div>
+                  <a data-bind-href="mailto:|contact.email" data-bind="contact.email" class="about-info-value"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="about-info-item">
+                <i class="fas fa-phone text-primary"></i>
+                <div class="ms-3">
+                  <div class="fw-semibold mb-1">Phone</div>
+                  <a data-bind-href="tel:|contact.phoneHref" data-bind="contact.phone" class="about-info-value"></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="about-info-item">
+                <i class="fas fa-map-marker-alt text-primary"></i>
+                <div class="ms-3">
+                  <div class="fw-semibold mb-1">Location</div>
+                  <span class="about-info-value" data-bind="contact.locationShort"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <h4 class="float-up-on-no-scroll">Hi there &#128075;, I'm,</h4>
-    <b
-      ><h1 id="typewriter-element" class="name-text float-up-on-no-scroll">
-        Kavindu Himashana Suraweera
-      </h1></b
-    >
-  </div>
-  <div class="profile-description float-up-on-no-scroll">
-    <p>
-      I am an
-      <span class="underline-text">Associate Software Engineer</span> with
-      strong foundations in both frontend and backend programming. Experienced
-      in software, web and mobile applications and 3D game development.
-      Passionate about applying my knowledge and skills to real-world software
-      engineering challenges to make a significant contribution to the evolving
-      technological world.
-    </p>
   </div>
 </section>

@@ -7,6 +7,8 @@ deployment:
     - /bin/cp -R components $DEPLOYPATH 
     - /bin/cp components-binder.js $DEPLOYPATH 
     - /bin/cp -R css $DEPLOYPATH 
+    - /bin/cp -R data $DEPLOYPATH 
     - /bin/cp helpers.js $DEPLOYPATH 
     - /bin/cp index.html $DEPLOYPATH 
+    - /bin/cp terminal.js $DEPLOYPATH 
     - /bin/cp typewriter.js $DEPLOYPATH 
