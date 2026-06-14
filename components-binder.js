@@ -1,6 +1,5 @@
 // components-binder.js
 import { profile } from './data/profile.js';
-import { capitalizeText } from './helpers.js';
 
 export async function loadComponent(containerId, componentPath, callback) {
     const container = document.getElementById(containerId);
@@ -84,6 +83,32 @@ export function bindProfile(data = profile) {
     renderSocialLinks(data);
     renderSkills(data);
     renderEducation(data);
+    renderActionLinks(data);
+}
+
+// Wire the "View Resume" / "View Certificates" buttons from profile URLs.
+// A missing URL leaves the button visible but inert (so you can add the link
+// later in data/profile.js with nothing else to change).
+function renderActionLinks(data) {
+    setActionLink(document.querySelector('[data-action-resume]'), data.resumeUrl);
+    setActionLink(document.querySelector('[data-action-certificates]'), data.certificatesUrl);
+}
+
+function setActionLink(el, url) {
+    if (!el) return;
+    if (url) {
+        el.setAttribute('href', url);
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
+        el.classList.remove('is-disabled');
+        el.removeAttribute('aria-disabled');
+        el.removeAttribute('title');
+    } else {
+        el.removeAttribute('href');        // no href -> not an active link
+        el.classList.add('is-disabled');
+        el.setAttribute('aria-disabled', 'true');
+        el.setAttribute('title', 'Coming soon');
+    }
 }
 
 // "prefix|path" -> ["prefix", "path"]; "path" -> ["", "path"]
@@ -170,7 +195,6 @@ function renderEducation(data) {
                 </div>
             </div>`)
         .join('');
-
-    // Preserve original casing behavior applied to timeline text.
-    capitalizeText('.timeline-title');
+    // Titles render with the exact casing from data/profile.js (so "MSc"/"BSc"
+    // stay correct) — no auto-capitalization is applied.
 }

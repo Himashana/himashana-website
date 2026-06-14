@@ -278,6 +278,14 @@ img { max-width: 100%; }
     transition: var(--t);
 }
 .btn:hover, .btn:focus { text-decoration: none; }
+/* A button whose link isn't set yet (e.g. resume pending): visible but inert. */
+.btn.is-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+    transform: none;
+}
 
 .btn-primary {
     border: none;

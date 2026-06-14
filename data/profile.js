@@ -22,7 +22,7 @@ export const profile = {
 
   // --- Contact details (about-me + contact section + terminal `contact`) --
   contact: {
-    email: "contact@himashana.me",
+    email: "himashanasuraweera5@gmail.com",
     phone: "+94 70 151 7713", // VERIFY: canonical (old copies disagreed)
     phoneHref: "+94701517713", // tel: link target — digits only, with country code
     location: "Gonulla, Gonawila, NWP, Sri Lanka", // VERIFY
@@ -43,14 +43,14 @@ export const profile = {
       url: "https://github.com/himashana",
     },
     {
-      name: "Twitter",
-      icon: "fab fa-twitter",
-      url: "https://twitter.com/himashana",
+      name: "Facebook",
+      icon: "fab fa-facebook",
+      url: "https://www.facebook.com/sakhsuraweera2",
     },
     {
       name: "Instagram",
       icon: "fab fa-instagram",
-      url: "https://instagram.com/himashana",
+      url: "https://instagram.com/sakhsuraweera2",
     },
   ],
 
@@ -113,7 +113,10 @@ export const profile = {
       title: "Game Development",
       icon: "fas fa-gamepad",
       color: "text-danger",
-      items: [{ name: "Unity, C#", level: 92 }],
+      items: [
+        { name: "Unity, C#", level: 92 },
+        { name: "Unreal Engine, C++", level: 52 },
+      ],
     },
     {
       title: "Soft Skills",
@@ -147,8 +150,10 @@ export const profile = {
     },
   ],
 
-  // --- Resume (terminal `resume` + any download button) -------------------
-  // Leave "" until you have a hosted resume; the terminal shows a friendly
-  // "coming soon" message while empty.
+  // --- Resume & certificates (buttons in the Education section + terminal) -
+  // Leave resumeUrl "" until you have a hosted resume: the "View Resume" button
+  // stays visible but inert, and the terminal `resume` shows a "coming soon"
+  // message. Just paste your link here later to activate it — nothing else to do.
   resumeUrl: "",
+  certificatesUrl: "https://www.linkedin.com/in/himashana/details/certifications/",
 };
