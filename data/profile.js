@@ -154,6 +154,8 @@ export const profile = {
   // Leave resumeUrl "" until you have a hosted resume: the "View Resume" button
   // stays visible but inert, and the terminal `resume` shows a "coming soon"
   // message. Just paste your link here later to activate it — nothing else to do.
-  resumeUrl: "",
-  certificatesUrl: "https://www.linkedin.com/in/himashana/details/certifications/",
+  resumeUrl:
+    "https://pdf.chnsoftwaredevelopers.com/?id=246a3ffe6nab4s273b3554440c6622d34e22fe51",
+  certificatesUrl:
+    "https://www.linkedin.com/in/himashana/details/certifications/",
 };
